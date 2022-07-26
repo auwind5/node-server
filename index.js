@@ -29,7 +29,7 @@ app.put('/api/modifyBookInfo', (req, res) => {
       if (error) {
         return connection.rollback(() => { throw error })
       }
-      connection.query('insert into Book select ? , ? , ?, ?, ? from Book', [
+      connection.query('insert into Book values (? , ? , ?, ?, ?)', [
         req.body.bookID,
         req.body.bookName,
         req.body.author,
@@ -69,7 +69,6 @@ app.patch('/api/modifyPartialBookInfo', (req, res) => {
         if (error) {
           return connection.rollback(() => { throw error })
         }
-        console.log("++++results", results)
         connection.commit(error => {
           if (error) {
             return connection.rollback(() => { throw error })
